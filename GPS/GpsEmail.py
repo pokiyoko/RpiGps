@@ -40,6 +40,10 @@ class SpeedCheck():
 		except:
 			return False
 
+def signalHandler(signal, frame):
+    print 'You pressed Ctrl+C!'
+    sys.exit(0)
+
 def sendMail(sender = user , psw = psd, toRecipe = maillist, sub = topic, Info = Text ):
 	gmail_user = sender
 	gmail_pwd = psw
@@ -85,8 +89,6 @@ while 1:
 	signal.signal(signal.SIGINT, signalHandler)
 
 
-def signalHandler(signal, frame):
-    print 'You pressed Ctrl+C!'
-    sys.exit(0)
+
 
 #sendMail()
