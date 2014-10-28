@@ -68,8 +68,10 @@ def sendMail(sender = user , psw = psd, toRecipe = maillist, sub = topic, Info =
 
 Sensor = SpeedCheck(limit= limit)
 
+print "Runing! Be Carefull I have one eye on your speed!"
+
 while 1:
-	if Sensor.SpeedCheck():
+	if Sensor.check():
 		if Sensor.speed >= Sensor.limit and Sensor.warning == False:
 			Sensor.warning = True
 
