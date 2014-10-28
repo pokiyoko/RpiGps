@@ -75,7 +75,7 @@ while 1:
 
 			Text = "Your car WWD2025 exceeding 90km per hour in this location: \n latitude: {}\n longitude: {}".format(Sensor.longitude,Sensor.latitude)
 
-			sendMail():
+			sendMail()
 
 		if Sensor.speed <= Sensor.limit - 30 and Sensor.warning:
 			Sensor.warning = False
