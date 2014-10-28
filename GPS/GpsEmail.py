@@ -25,7 +25,7 @@ class SpeedCheck():
 		self.longitude = 0
 		self.warning = False
 
-	def check():
+	def check(self):
 		inp_data = self.__port.readline()
 		try:
 			msg = pynmea2.parse(inp_data)
