@@ -16,7 +16,7 @@ maillist = ['vcamargo.e@gmail.com','zulfikri1980@gmail.com']
 topic = "Speed Warning!"
 Text = ""
 
-MailTimer = EventTimer(minutes = 1)
+MailTimer = EventTimer(minutes = 5)
 MailTimer.run()
 
 class SpeedCheck():
@@ -92,11 +92,7 @@ while 1:
 
 	if MailTimer.ready():
 		
-		Text = """ Test Email with GPS Data!
-		latitude: {}
-		longitude: {}
-		Speed: {}""".format(Sensor.longitude,Sensor.latitude,Sensor.speed)
-		
+		Text = "Your car WWD2025 exceeding 90km per hour in this location: \nlatitude: {}\nlongitude: {} \nSpeed: {}".format(Sensor.longitude,Sensor.latitude,Sensor.speed)
 		sendMail()
 
 	signal.signal(signal.SIGINT, signalHandler)
