@@ -16,7 +16,7 @@ maillist = ['vcamargo.e@gmail.com','zulfikri1980@gmail.com']
 topic = "Speed Warning!"
 Text = ""
 
-MailTimer = EventTimer(minutes = 5)
+MailTimer = EventTimer(minutes = 1)
 MailTimer.run()
 
 class SpeedCheck():
