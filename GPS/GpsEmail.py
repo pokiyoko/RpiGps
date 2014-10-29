@@ -91,7 +91,12 @@ while 1:
 			Sensor.warning = False
 
 	if MailTimer.ready():
-		Text = "latitude: {}\n longitude: {}\nSpeed: {}".format(Sensor.longitude,Sensor.latitude,Sensor.speed)
+		
+		Text = """ Test Email with GPS Data!
+		latitude: {}
+		longitude: {}
+		Speed: {}""".format(Sensor.longitude,Sensor.latitude,Sensor.speed)
+		
 		sendMail()
 
 	signal.signal(signal.SIGINT, signalHandler)
