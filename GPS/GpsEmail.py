@@ -3,6 +3,8 @@ import pynmea2
 import smtplib
 import datetime
 
+from eventtimer import EventTimer 		
+
 import signal 													# Import Signals
 import sys
 
@@ -14,6 +16,8 @@ maillist = ['vcamargo.e@gmail.com','zulfikri1980@gmail.com']
 topic = "Speed Warning!"
 Text = ""
 
+MailTimer = EventTimer(minutes = 5)
+MailTimer.run()
 
 class SpeedCheck():
 	def __init__(self,port = '/dev/ttyUSB0' ,limit = 90):
@@ -32,9 +36,9 @@ class SpeedCheck():
 		except:
 			pass
 		try:
-			self.__longitude = msg.longitude
-			self.__latitude = msg.latitude
-			self.__speed = msg.spd_over_grnd * 1.852
+			self.longitude = msg.longitude
+			self.latitude = msg.latitude
+			self.speed = msg.spd_over_grnd * 1.852
 
 			return True
 		except:
@@ -85,6 +89,10 @@ while 1:
 
 		if Sensor.speed <= Sensor.limit - 30 and Sensor.warning:
 			Sensor.warning = False
+
+	if MailTimer.ready():
+		Text = "latitude: {}\n longitude: {}\nSpeed: {}".format(Sensor.longitude,Sensor.latitude,Sensor.speed)
+		sendMail()
 
 	signal.signal(signal.SIGINT, signalHandler)
 
