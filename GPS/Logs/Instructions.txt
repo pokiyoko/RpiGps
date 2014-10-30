@@ -1,0 +1,5 @@
+Instructions 
+
+sudo crontab -e
+
+@reboot sh /home/pi/Dev/RpiGps/GPS/launcher.sh > /home/pi/Dev/RpiGps/GPS/Logs/cronlog 2>&1

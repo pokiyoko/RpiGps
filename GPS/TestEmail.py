@@ -5,10 +5,15 @@ import smtplib
 limit = 90
 
 user = "testinghardware61@gmail.com"
+print "u = {}".format(user)
+
 psd = "jijiharon"
-maillist = ['vcamargo.e@gmail.com','zulfikri1980@gmail.com']
+print "p = {}".format(psd)
+
+maillist = ['vcamargo.e@gmail.com']
 topic = "Email Test!"
-Text = "Hello World!"
+Text = "Hello World!\n Test {} \n Test {}".format(0.0,0.0)
+
 
 
 def sendMail(sender = user , psw = psd, toRecipe = maillist, sub = topic, Info = Text ):

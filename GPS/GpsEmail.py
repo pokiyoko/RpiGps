@@ -8,15 +8,22 @@ from eventtimer import EventTimer
 import signal 													# Import Signals
 import sys
 
-limit = 90
+def readConfig():
+	inp = open('config.dat','r')
+	data = inp.read().split(',')
+	data.remove('')
+	return data
 
-user = "testinghardware61@gmail.com"
-psd = "jijiharon"
-maillist = ['vcamargo.e@gmail.com','zulfikri1980@gmail.com']
+conf = readConfig()
+user = conf[0]
+psd = conf[1]
+limit = int(conf[2])
+maillist = conf[4:]
+
 topic = "Speed Warning!"
 Text = ""
 
-MailTimer = EventTimer(minutes = 5)
+MailTimer = EventTimer(minutes = 1)
 MailTimer.run()
 
 class SpeedCheck():
@@ -76,6 +83,12 @@ def sendMail(sender = user , psw = psd, toRecipe = maillist, sub = topic, Info =
 
 Sensor = SpeedCheck(limit= limit)
 
+Text = """Hello User, The System is running from this point your Speed will be monitored.
+Have a Nice day!
+"""
+
+sendMail(Info = Text)
+
 print "Runing! Be Carefull I have one eye on your speed!"
 
 while 1:
@@ -84,16 +97,15 @@ while 1:
 			Sensor.warning = True
 
 			Text = "Your car WWD2025 exceeding 90km per hour in this location: \n latitude: {}\n longitude: {}".format(Sensor.longitude,Sensor.latitude)
-
-			sendMail()
+			sendMail(Info = Text)
 
 		if Sensor.speed <= Sensor.limit - 30 and Sensor.warning:
 			Sensor.warning = False
 
-	if MailTimer.ready():
+	# if MailTimer.ready():
 		
-		Text = "Your car WWD2025 exceeding 90km per hour in this location: \nlatitude: {}\nlongitude: {} \nSpeed: {}".format(Sensor.longitude,Sensor.latitude,Sensor.speed)
-		sendMail()
+	# 	Text = "Your car WWD2025 exceeding 90km per hour in this location: \nlatitude: {}\nlongitude: {} \nSpeed: {}".format(Sensor.longitude,Sensor.latitude,Sensor.speed)
+	# 	sendMail(Info = Text)
 
 	signal.signal(signal.SIGINT, signalHandler)
 
